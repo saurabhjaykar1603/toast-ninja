@@ -12,5 +12,6 @@ export type {
   ToastOptions,
   ToastPosition,
   ToastProviderProps,
+  ToastTheme,
   ToastType
 } from "./types/toast.types";

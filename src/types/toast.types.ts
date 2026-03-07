@@ -7,6 +7,8 @@ export type ToastPosition =
   | "bottom-right"
   | "bottom-left";
 export type ToastAnimation = "slide" | "fade";
+export type ToastTheme = "auto" | "light" | "dark";
+export type ResolvedToastTheme = "light" | "dark";
 
 export interface ToastOptions {
   message: string;
@@ -38,6 +40,7 @@ export interface ToastProviderProps {
   position?: ToastPosition;
   animation?: ToastAnimation;
   maxVisibleToasts?: number;
+  theme?: ToastTheme;
 }
 
 export interface ToastApi {

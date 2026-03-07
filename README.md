@@ -68,6 +68,7 @@ toast.promise(fetchData(), {
   duration={2000}
   position="top-right"
   animation="slide"
+  theme="auto"
   maxVisibleToasts={4}
 >
   <App />
@@ -79,6 +80,7 @@ toast.promise(fetchData(), {
 | `duration`         | `number`                                            | `2000`      |
 | `position`         | `"top-right" \| "top-left" \| "bottom-right" \| "bottom-left"` | `top-right` |
 | `animation`        | `"slide" \| "fade"`                                 | `slide`     |
+| `theme`            | `"auto" \| "light" \| "dark"`                       | `auto`      |
 | `maxVisibleToasts` | `number`                                            | `4`         |
 
 ## Styling

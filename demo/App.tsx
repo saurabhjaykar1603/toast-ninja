@@ -255,7 +255,12 @@ export default function App() {
   );
 
   return (
-    <ToastProvider duration={duration} position={position} animation={animation}>
+    <ToastProvider
+      duration={duration}
+      position={position}
+      animation={animation}
+      theme={theme}
+    >
       <div className="demo-root" data-theme={theme}>
 
         {/* Theme toggle — fixed top-right */}

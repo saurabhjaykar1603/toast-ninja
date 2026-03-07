@@ -185,4 +185,18 @@ describe("toast-ninja", () => {
       expect(screen.getByText("Second queued")).toBeInTheDocument();
     });
   });
+
+  test("explicit theme is passed to toast container", () => {
+    render(
+      <ToastProvider theme="light">
+        <TriggerButtons />
+      </ToastProvider>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "show success" }));
+    expect(screen.getByTestId("toast-container")).toHaveAttribute(
+      "data-theme",
+      "light"
+    );
+  });
 });

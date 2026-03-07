@@ -1,8 +1,9 @@
-import { createContext, useCallback, useMemo, useState } from "react";
+import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import { ToastContainer } from "../components/ToastContainer";
 import type {
   PromiseToastMessages,
   PromiseToastOptions,
+  ResolvedToastTheme,
   ToastAnimation,
   ToastContextValue,
   ToastItem,
@@ -15,6 +16,16 @@ const DEFAULT_DURATION = 2000;
 const DEFAULT_POSITION: ToastPosition = "top-right";
 const DEFAULT_ANIMATION: ToastAnimation = "slide";
 const DEFAULT_MAX_VISIBLE = 4;
+const DEFAULT_THEME: ResolvedToastTheme = "dark";
+
+const resolveSystemTheme = (): ResolvedToastTheme => {
+  if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+    return DEFAULT_THEME;
+  }
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
 
 let toastCounter = 0;
 const createToastId = (): string => {
@@ -54,9 +65,40 @@ export function ToastProvider({
   duration = DEFAULT_DURATION,
   position = DEFAULT_POSITION,
   animation = DEFAULT_ANIMATION,
-  maxVisibleToasts = DEFAULT_MAX_VISIBLE
+  maxVisibleToasts = DEFAULT_MAX_VISIBLE,
+  theme = "auto"
 }: ToastProviderProps) {
   const [state, setState] = useState<ToastState>({ visible: [], queue: [] });
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedToastTheme>(() =>
+    theme === "auto" ? resolveSystemTheme() : theme
+  );
+
+  useEffect(() => {
+    if (theme !== "auto") {
+      setResolvedTheme(theme);
+      return undefined;
+    }
+
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      setResolvedTheme(DEFAULT_THEME);
+      return undefined;
+    }
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const syncTheme = () => {
+      setResolvedTheme(mediaQuery.matches ? "dark" : "light");
+    };
+
+    syncTheme();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", syncTheme);
+      return () => mediaQuery.removeEventListener("change", syncTheme);
+    }
+
+    mediaQuery.addListener(syncTheme);
+    return () => mediaQuery.removeListener(syncTheme);
+  }, [theme]);
 
   const dismissToast = useCallback(
     (id: string) => {
@@ -170,6 +212,7 @@ export function ToastProvider({
         animation={animation}
         onDismiss={dismissToast}
         position={position}
+        theme={resolvedTheme}
         toasts={state.visible}
       />
     </ToastContext.Provider>

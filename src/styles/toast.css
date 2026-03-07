@@ -2,27 +2,29 @@
    toast-ninja — modern minimal toast styles
    ===================================================== */
 
-:root {
+/* ── Container ────────────────────────────────────── */
+.toast-ninja-container {
   --toast-bg:           #18181b;
   --toast-border:       rgba(255, 255, 255, 0.1);
   --toast-text:         #fafafa;
   --toast-sub:          #a1a1aa;
-  --toast-shadow:       0 4px 12px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
+  --toast-shadow:       0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --toast-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --toast-close:        rgba(255, 255, 255, 0.32);
+  --toast-close-hover:  rgba(255, 255, 255, 0.72);
+  --toast-close-bg:     rgba(255, 255, 255, 0.08);
   --toast-radius:       14px;
 
-  --c-success:  #22c55e;
-  --c-error:    #ef4444;
-  --c-warning:  #f59e0b;
-  --c-info:     #3b82f6;
+  --c-success:          #22c55e;
+  --c-error:            #ef4444;
+  --c-warning:          #f59e0b;
+  --c-info:             #3b82f6;
 
-  --bg-success: rgba(34, 197, 94, 0.12);
-  --bg-error:   rgba(239, 68, 68, 0.12);
-  --bg-warning: rgba(245, 158, 11, 0.12);
-  --bg-info:    rgba(59, 130, 246, 0.12);
-}
+  --bg-success:         rgba(34, 197, 94, 0.12);
+  --bg-error:           rgba(239, 68, 68, 0.12);
+  --bg-warning:         rgba(245, 158, 11, 0.12);
+  --bg-info:            rgba(59, 130, 246, 0.12);
 
-/* ── Container ────────────────────────────────────── */
-.toast-ninja-container {
   position: fixed;
   z-index: 9999;
   display: flex;
@@ -36,6 +38,54 @@
 .toast-ninja-container--top-left     { top: 1.25rem; left: 1.25rem; }
 .toast-ninja-container--bottom-right { bottom: 1.25rem; right: 1.25rem; flex-direction: column-reverse; }
 .toast-ninja-container--bottom-left  { bottom: 1.25rem; left: 1.25rem; flex-direction: column-reverse; }
+
+@media (prefers-color-scheme: light) {
+  .toast-ninja-container {
+    --toast-bg:           #ffffff;
+    --toast-border:       rgba(148, 163, 184, 0.36);
+    --toast-text:         #0f172a;
+    --toast-sub:          #475569;
+    --toast-shadow:       0 8px 20px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.08);
+    --toast-hover-shadow: 0 10px 26px rgba(15, 23, 42, 0.14), 0 2px 8px rgba(15, 23, 42, 0.1);
+    --toast-close:        rgba(15, 23, 42, 0.38);
+    --toast-close-hover:  #0f172a;
+    --toast-close-bg:     rgba(148, 163, 184, 0.2);
+
+    --bg-success:         rgba(22, 163, 74, 0.14);
+    --bg-error:           rgba(220, 38, 38, 0.14);
+    --bg-warning:         rgba(217, 119, 6, 0.14);
+    --bg-info:            rgba(37, 99, 235, 0.14);
+  }
+}
+
+.toast-ninja-container[data-theme="light"] {
+  --toast-bg:           #ffffff;
+  --toast-border:       rgba(148, 163, 184, 0.36);
+  --toast-text:         #0f172a;
+  --toast-sub:          #475569;
+  --toast-shadow:       0 8px 20px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.08);
+  --toast-hover-shadow: 0 10px 26px rgba(15, 23, 42, 0.14), 0 2px 8px rgba(15, 23, 42, 0.1);
+  --toast-close:        rgba(15, 23, 42, 0.38);
+  --toast-close-hover:  #0f172a;
+  --toast-close-bg:     rgba(148, 163, 184, 0.2);
+
+  --bg-success:         rgba(22, 163, 74, 0.14);
+  --bg-error:           rgba(220, 38, 38, 0.14);
+  --bg-warning:         rgba(217, 119, 6, 0.14);
+  --bg-info:            rgba(37, 99, 235, 0.14);
+}
+
+.toast-ninja-container[data-theme="dark"] {
+  --toast-bg:           #18181b;
+  --toast-border:       rgba(255, 255, 255, 0.1);
+  --toast-text:         #fafafa;
+  --toast-sub:          #a1a1aa;
+  --toast-shadow:       0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --toast-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --toast-close:        rgba(255, 255, 255, 0.32);
+  --toast-close-hover:  rgba(255, 255, 255, 0.72);
+  --toast-close-bg:     rgba(255, 255, 255, 0.08);
+}
 
 /* ── Toast item ───────────────────────────────────── */
 .toast-ninja-item {
@@ -55,7 +105,7 @@
 }
 
 .toast-ninja-item:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: var(--toast-hover-shadow);
 }
 
 /* ── Icon badge ───────────────────────────────────── */
@@ -111,15 +161,15 @@
   width: 22px;
   height: 22px;
   padding: 0;
-  color: rgba(255,255,255,0.3);
+  color: var(--toast-close);
   background: transparent;
   transition: background 130ms ease, color 130ms ease;
   margin-top: 2px;
 }
 
 .toast-ninja-close:hover {
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.7);
+  background: var(--toast-close-bg);
+  color: var(--toast-close-hover);
 }
 
 .toast-ninja-close svg {
