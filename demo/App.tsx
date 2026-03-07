@@ -330,13 +330,15 @@ export default function App() {
                 <span className="eyebrow-dot" />
                 Interactive playground
               </div>
-              <h1 className="demo-title">toast‑ninja</h1>
+              <div className="title-row">
+                <h1 className="demo-title">toast‑ninja</h1>
+                <Mascot />
+              </div>
               <p className="demo-desc">
                 Extremely lightweight, hook-based toast notifications for React. Built for performance, aesthetics, and ease of use.
               </p>
               <CodeBlock code="npm install toast-ninja" lang="bash" />
             </div>
-            <Mascot />
           </header>
 
           <div className="demo-divider" />
