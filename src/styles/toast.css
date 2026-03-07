@@ -29,7 +29,7 @@
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0;                              /* spacing via wrapper padding-bottom */
   width: min(360px, calc(100vw - 2rem));
   pointer-events: none;
 }
@@ -101,7 +101,12 @@
   box-shadow: var(--toast-shadow);
   overflow: hidden;
   will-change: transform, opacity;
-  transition: box-shadow 150ms ease;
+  transition:
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity   280ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 150ms ease;
+  transform: translateX(0) scale(1);
+  opacity: 1;
 }
 
 .toast-ninja-item:hover {
@@ -183,9 +188,13 @@
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
   height: 2px;
   border-radius: 0;
   opacity: 0.5;
+  transform-origin: left center;
+  transform: scaleX(1);
+  will-change: transform;
 }
 
 .toast-ninja-item--success .toast-ninja-progress { background: var(--c-success); }
@@ -193,63 +202,51 @@
 .toast-ninja-item--warning .toast-ninja-progress { background: var(--c-warning); }
 .toast-ninja-item--info    .toast-ninja-progress { background: var(--c-info); }
 
-/* ── Animations ──────────────────────────────────── */
+/* ── Enter/Exit states (transition-based to avoid flicker) ───────────────── */
 .toast-ninja-item--enter {
-  animation-duration: 240ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  animation-fill-mode: both;
+  opacity: 0;
 }
 
 .toast-ninja-item--slide.toast-ninja-item--enter[data-position="top-right"],
 .toast-ninja-item--slide.toast-ninja-item--enter[data-position="bottom-right"] {
-  animation-name: tn-in-right;
+  transform: translateX(10px) scale(0.97);
 }
 
 .toast-ninja-item--slide.toast-ninja-item--enter[data-position="top-left"],
 .toast-ninja-item--slide.toast-ninja-item--enter[data-position="bottom-left"] {
-  animation-name: tn-in-left;
+  transform: translateX(-10px) scale(0.97);
 }
 
 .toast-ninja-item--fade.toast-ninja-item--enter {
-  animation-name: tn-in-fade;
+  transform: translateY(6px) scale(0.97);
+}
+
+.toast-ninja-item--entered {
+  opacity: 1;
+  transform: translateX(0) translateY(0) scale(1);
 }
 
 .toast-ninja-item--exit {
   pointer-events: none;
+  opacity: 0;
 }
 
 .toast-ninja-item--slide.toast-ninja-item--exit[data-position="top-right"],
 .toast-ninja-item--slide.toast-ninja-item--exit[data-position="bottom-right"] {
-  animation: tn-out-right 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+  transform: translateX(10px) scale(0.97);
 }
 
 .toast-ninja-item--slide.toast-ninja-item--exit[data-position="top-left"],
 .toast-ninja-item--slide.toast-ninja-item--exit[data-position="bottom-left"] {
-  animation: tn-out-left 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+  transform: translateX(-10px) scale(0.97);
 }
 
 .toast-ninja-item--fade.toast-ninja-item--exit {
-  animation: tn-out-fade 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+  transform: translateY(-6px) scale(0.97);
 }
 
-@keyframes tn-in-right {
-  from { opacity: 0; transform: translateX(16px) scale(0.96); }
-  to   { opacity: 1; transform: translateX(0) scale(1); }
-}
-@keyframes tn-in-left {
-  from { opacity: 0; transform: translateX(-16px) scale(0.96); }
-  to   { opacity: 1; transform: translateX(0) scale(1); }
-}
-@keyframes tn-in-fade {
-  from { opacity: 0; transform: scale(0.95) translateY(8px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
-}
-@keyframes tn-out-right {
-  to { opacity: 0; transform: translateX(16px) scale(0.96); }
-}
-@keyframes tn-out-left {
-  to { opacity: 0; transform: translateX(-16px) scale(0.96); }
-}
-@keyframes tn-out-fade {
-  to { opacity: 0; transform: scale(0.95) translateY(-6px); }
+/* Hide progress bar instantly on exit */
+.toast-ninja-item--exit .toast-ninja-progress {
+  opacity: 0;
+  transition: opacity 80ms ease;
 }
