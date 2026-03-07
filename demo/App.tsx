@@ -38,10 +38,25 @@ function useCopy() {
 function Mascot() {
   return (
     <div className="demo-mascot" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2l3.5 7.5L22 12l-6.5 2.5L12 22l-3.5-7.5L2 12l6.5-2.5L12 2z" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
+      <div className="mascot-inner">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Main Shuriken Body */}
+          <path
+            d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"
+            fill="currentColor"
+            className="mascot-base"
+          />
+          {/* Inner Details / Sharp Edges */}
+          <path
+            d="M12 6L13.5 10.5L18 12L13.5 13.5L12 18L10.5 13.5L6 12L10.5 10.5L12 6Z"
+            fill="rgba(255,255,255,0.3)"
+          />
+          {/* Center Core */}
+          <circle cx="12" cy="12" r="2.5" fill="currentColor" className="mascot-core" />
+          <circle cx="12" cy="12" r="1.2" fill="white" opacity="0.5" />
+        </svg>
+      </div>
+      <div className="mascot-glow" />
     </div>
   );
 }

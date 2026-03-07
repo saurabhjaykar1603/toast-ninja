@@ -23,6 +23,7 @@
   --info:        #38bdf8;
   --radius:      8px;
   --t:           140ms ease;
+  --glow:        rgba(129, 140, 248, 0.4);
   color-scheme: dark;
 }
 
@@ -40,6 +41,7 @@
   --error:       #dc2626;
   --warning:     #b45309;
   --info:        #0284c7;
+  --glow:        rgba(99, 102, 241, 0.2);
   color-scheme: light;
 }
 
@@ -183,39 +185,76 @@ html, body {
 
 /* ── Mascot ─────────────────────────────────────────── */
 .demo-mascot {
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent);
   box-shadow:
-    0 20px 40px -10px rgba(0,0,0,0.3),
-    inset 0 0 0 1px rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  animation: mascot-float 6s ease-in-out infinite;
+    0 20px 50px -12px rgba(0,0,0,0.5),
+    inset 0 0 0 1.5px rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  animation: mascot-float 8s ease-in-out infinite;
   flex-shrink: 0;
+  overflow: visible;
 }
 
 [data-theme="light"] .demo-mascot {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
   box-shadow:
-    0 20px 40px -10px rgba(0,0,0,0.1),
-    inset 0 0 0 1px rgba(255,255,255,0.5);
+    0 20px 50px -12px rgba(0,0,0,0.1),
+    inset 0 0 0 1.5px rgba(255,255,255,0.6);
+}
+
+.mascot-inner {
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: mascot-spin 12s linear infinite;
+  z-index: 2;
 }
 
 .demo-mascot svg {
-  width: 110px;
-  height: 110px;
-  filter: drop-shadow(0 0 15px var(--accent-dim));
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 20px var(--accent-dim));
+}
+
+.mascot-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 140px;
+  background: var(--accent);
+  filter: blur(40px);
+  border-radius: 50%;
+  opacity: 0.15;
+  z-index: 1;
+  animation: mascot-pulse 4s ease-in-out infinite;
 }
 
 @keyframes mascot-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%       { transform: translateY(-15px) rotate(5deg); }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-20px); }
+}
+
+@keyframes mascot-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes mascot-pulse {
+  0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 0.25; transform: translate(-50%, -50%) scale(1.2); }
 }
 
 /* ── Divider ────────────────────────────────────────── */
