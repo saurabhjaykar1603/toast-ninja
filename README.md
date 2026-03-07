@@ -5,6 +5,8 @@ A lightweight, customizable React toast notification library built with TypeScri
 [![npm](https://img.shields.io/npm/v/toast-ninja)](https://www.npmjs.com/package/toast-ninja)
 [![license](https://img.shields.io/npm/l/toast-ninja)](./LICENSE)
 
+**[Live Demo →](https://toast-ninja.vercel.app/)**
+
 ## Installation
 
 ```bash

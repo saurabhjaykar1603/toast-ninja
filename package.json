@@ -1,6 +1,6 @@
 {
   "name": "toast-ninja",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Lightweight, customizable React toast notification library built with TypeScript.",
   "license": "MIT",
   "author": "Saurabh",
