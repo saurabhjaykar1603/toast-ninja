@@ -352,7 +352,10 @@ export default function App() {
 
           {/* Footer */}
           <footer className="demo-footer">
-            Made with care · MIT · <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+            Made with care · MIT ·{" "}
+            <a href="https://github.com/saurabhjaykar1603/toast-ninja" target="_blank" rel="noreferrer">GitHub</a>
+            {" · "}
+            <a href="https://www.linkedin.com/in/saurabh-jaykar/" target="_blank" rel="noreferrer">LinkedIn</a>
           </footer>
 
         </div>
