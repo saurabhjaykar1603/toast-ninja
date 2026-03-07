@@ -42,6 +42,7 @@ export default function App() {
   );
 }
 ```
+Default styles are included automatically by the package build.
 
 ## Toast Types
 

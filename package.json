@@ -1,6 +1,6 @@
 {
   "name": "toast-ninja",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Lightweight, customizable React toast notification library built with TypeScript.",
   "license": "MIT",
   "author": "Saurabh",
@@ -26,11 +26,13 @@
     "README.md",
     "LICENSE"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "npm run build:lib && npm run build:demo",
-    "build:lib": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "build:lib": "tsup src/index.ts --format esm,cjs --dts --clean --inject-style",
     "build:demo": "vite build",
     "test": "jest --runInBand",
     "test:watch": "jest --watch",
