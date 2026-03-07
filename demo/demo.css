@@ -2,7 +2,7 @@
    toast-ninja demo — dark / light mode
    ===================================================== */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -47,7 +47,7 @@ html, body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Outfit", "Inter", system-ui, sans-serif;
   font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -61,6 +61,29 @@ html, body {
       rgba(129, 140, 248, 0.07) 0%, transparent 55%),
     var(--bg);
   transition: background var(--t);
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-bg-blob {
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+  filter: blur(60px);
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.6;
+  animation: blob-float 20s ease-in-out infinite;
+}
+
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-10%, 10%) scale(1.1); }
+  66%       { transform: translate(-5%, -5%) scale(0.9); }
 }
 
 .demo-container {
@@ -72,6 +95,21 @@ html, body {
 /* ── Header ─────────────────────────────────────────── */
 .demo-header {
   margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.header-left {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .demo-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .demo-eyebrow {
@@ -122,6 +160,62 @@ html, body {
   font-size: 0.97rem;
   margin-bottom: 1.5rem;
   max-width: 400px;
+}
+
+/* ── Logo ─────────────────────────────────────────── */
+.demo-logo {
+  width: 42px;
+  height: 42px;
+  background: var(--accent);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 16px -4px var(--accent-dim);
+  color: #fff;
+}
+
+.demo-logo svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── Mascot ─────────────────────────────────────────── */
+.demo-mascot {
+  width: 180px;
+  height: 180px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  box-shadow:
+    0 20px 40px -10px rgba(0,0,0,0.3),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  animation: mascot-float 6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+[data-theme="light"] .demo-mascot {
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 20px 40px -10px rgba(0,0,0,0.1),
+    inset 0 0 0 1px rgba(255,255,255,0.5);
+}
+
+.demo-mascot svg {
+  width: 110px;
+  height: 110px;
+  filter: drop-shadow(0 0 15px var(--accent-dim));
+}
+
+@keyframes mascot-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-15px) rotate(5deg); }
 }
 
 /* ── Divider ────────────────────────────────────────── */
@@ -179,7 +273,7 @@ html, body {
   border: 1px solid var(--line);
   background: transparent;
   color: var(--muted);
-  font-family: "Inter", sans-serif;
+  font-family: inherit;
   font-size: 0.8rem;
   font-weight: 500;
   padding: 0.3rem 0.8rem;
@@ -329,7 +423,7 @@ html, body {
 .btn {
   cursor: pointer;
   border: none;
-  font-family: "Inter", sans-serif;
+  font-family: inherit;
   font-size: 0.85rem;
   font-weight: 600;
   padding: 0.6rem 1.2rem;
@@ -393,7 +487,7 @@ html, body {
   padding: 0.22rem 0.55rem;
   font-size: 0.7rem;
   font-weight: 500;
-  font-family: "Inter", sans-serif;
+  font-family: inherit;
   color: var(--muted);
   display: inline-flex;
   align-items: center;
@@ -461,7 +555,7 @@ html, body {
   padding: 0.4rem 0.85rem;
   font-size: 0.77rem;
   font-weight: 600;
-  font-family: "Inter", sans-serif;
+  font-family: inherit;
   color: var(--muted);
   display: inline-flex;
   align-items: center;

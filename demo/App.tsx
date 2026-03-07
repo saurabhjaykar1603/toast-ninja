@@ -31,6 +31,21 @@ function useCopy() {
   return { copied, copy };
 }
 
+// ─── Logo ────────────────────────────────────────────────────────────────────
+
+// ─── Mascot ──────────────────────────────────────────────────────────────────
+
+function Mascot() {
+  return (
+    <div className="demo-mascot" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2l3.5 7.5L22 12l-6.5 2.5L12 22l-3.5-7.5L2 12l6.5-2.5L12 2z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    </div>
+  );
+}
+
 // ─── CodeBlock ────────────────────────────────────────────────────────────────
 
 function highlight(raw: string): string {
@@ -262,6 +277,7 @@ export default function App() {
       theme={theme}
     >
       <div className="demo-root" data-theme={theme}>
+        <div className="demo-bg-blob" aria-hidden="true" />
 
         {/* Theme toggle — fixed top-right */}
         <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
@@ -294,16 +310,18 @@ export default function App() {
 
           {/* Header */}
           <header className="demo-header">
-            <div className="demo-eyebrow">
-              <span className="eyebrow-dot" />
-              Interactive playground
+            <div className="header-left">
+              <div className="demo-eyebrow">
+                <span className="eyebrow-dot" />
+                Interactive playground
+              </div>
+              <h1 className="demo-title">toast‑ninja</h1>
+              <p className="demo-desc">
+                Extremely lightweight, hook-based toast notifications for React. Built for performance, aesthetics, and ease of use.
+              </p>
+              <CodeBlock code="npm install toast-ninja" lang="bash" />
             </div>
-            <h1 className="demo-title">toast‑ninja</h1>
-            <p className="demo-desc">
-              Zero-dependency toast notifications for React.
-              Lightweight, accessible, and easy to drop in.
-            </p>
-            <CodeBlock code="npm install toast-ninja" lang="bash" />
+            <Mascot />
           </header>
 
           <div className="demo-divider" />
