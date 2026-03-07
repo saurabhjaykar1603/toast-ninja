@@ -356,6 +356,8 @@ export default function App() {
             <a href="https://github.com/saurabhjaykar1603/toast-ninja" target="_blank" rel="noreferrer">GitHub</a>
             {" · "}
             <a href="https://www.linkedin.com/in/saurabh-jaykar/" target="_blank" rel="noreferrer">LinkedIn</a>
+            {" · "}
+            <a href="https://www.npmjs.com/package/toast-ninja" target="_blank" rel="noreferrer">npm</a>
           </footer>
 
         </div>
