@@ -4,6 +4,14 @@
   "description": "Lightweight, customizable React toast notification library built with TypeScript.",
   "license": "MIT",
   "author": "Saurabh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saurabhjaykar1603/toast-ninja.git"
+  },
+  "bugs": {
+    "url": "https://github.com/saurabhjaykar1603/toast-ninja/issues"
+  },
+  "homepage": "https://toast-ninja.vercel.app/",
   "keywords": [
     "react",
     "toast",
